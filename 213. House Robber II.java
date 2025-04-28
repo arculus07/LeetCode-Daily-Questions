@@ -51,3 +51,29 @@ class Solution {
         return dp[i] = Math.max(st,nS);
     }
 }
+
+
+#Approach 2
+
+class Solution {
+    public int rob(int[] nums) {
+        if(nums.length == 1)return nums[0];
+        if(nums.length == 2)return Math.max(nums[0],nums[1]);
+
+        int t = solve(nums,0,nums.length-2);
+        int nt = solve(nums,1,nums.length-1);
+
+        return Math.max(t,nt);
+    }
+    public int solve(int[] nums,int i,int n){
+        int p = 0,pp =0;
+        for(int j = i;j<=n;j++){
+            int s = p;
+            int t = nums[j]+pp;
+            int x = Math.max(s,t);
+            pp = p;
+            p = x;
+        }
+        return p;
+    }
+}
